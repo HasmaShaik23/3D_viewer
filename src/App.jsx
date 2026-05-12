@@ -75,55 +75,46 @@ function App() {
       {/* MODEL VIEWER */}
       <div className="viewer-section">
 
-        <model-viewer
-          src="/example.glb"
-          alt="3D Product"
+    <model-viewer
+  src="/example.glb"
+  alt="3D Product"
 
-          /* AR */
-          ar
-          ar-modes="scene-viewer webxr quick-look"
-          ar-scale="auto"
-          ar-placement="floor"
+  ar
+  ar-modes="scene-viewer webxr quick-look"
 
-          /* CONTROLS */
-          camera-controls
-          touch-action="pan-y"
+  ar-placement="floor"
+  ar-scale="fixed"
 
-          /* AUTO ROTATE */
-          auto-rotate
-          auto-rotate-delay="0"
-          rotation-per-second="20deg"
+  scale="0.3 0.3 0.3"
 
-          /* LIGHTING */
-          exposure="1.4"
-          shadow-intensity="2"
-          shadow-softness="1"
+  camera-controls
+  touch-action="pan-y"
 
-          environment-image="neutral"
+  auto-rotate
+  auto-rotate-delay="0"
 
-          /* PERFORMANCE */
-          loading="eager"
-          reveal="auto"
+  shadow-intensity="2"
+  shadow-softness="1"
 
-          /* CAMERA */
-          camera-orbit="0deg 75deg 105%"
-          min-camera-orbit="auto auto 50%"
-          max-camera-orbit="auto auto 200%"
+  exposure="1.4"
 
-          interaction-prompt="auto"
+  environment-image="neutral"
 
-          className="model-viewer"
-        >
+  loading="eager"
 
-          {/* MOBILE AR BUTTON */}
-          <button
-            slot="ar-button"
-            className="ar-button"
-          >
-            View in Room
-          </button>
+  camera-orbit="0deg 75deg 105%"
 
-        </model-viewer>
+  interaction-prompt="auto"
+
+  className="model-viewer"
+>
+  <button
+    slot="ar-button"
+    className="ar-button"
+  >
+    View in Room
+  </button>
+</model-viewer>
 
       </div>
 
