@@ -8,15 +8,18 @@ html,
 body,
 #root {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   font-family: Arial, sans-serif;
   background: #f3f3f3;
+
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-/* MAIN */
+/* MAIN LAYOUT */
 .app-container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 
   display: flex;
   align-items: center;
@@ -24,18 +27,21 @@ body,
 
   background: linear-gradient(
     to right,
-    #f4f4f4,
-    #d9d9d9
+    #f5f5f5,
+    #dcdcdc
   );
 }
 
 /* VIEWER */
 .viewer-section {
   flex: 1;
-  height: 100vh;
   position: relative;
+
+  width: 100%;
+  height: 100vh;
 }
 
+/* MODEL */
 .model-viewer {
   width: 100%;
   height: 100%;
@@ -83,9 +89,9 @@ body,
 
 /* AR BUTTON */
 .ar-button {
-  position: absolute;
+  position: fixed;
 
-  bottom: 25px;
+  bottom: 20px;
   left: 50%;
 
   transform: translateX(-50%);
@@ -100,7 +106,7 @@ body,
 
   border: none;
 
-  padding: 14px 30px;
+  padding: 14px 28px;
 
   border-radius: 999px;
 
@@ -109,7 +115,7 @@ body,
 
   cursor: pointer;
 
-  z-index: 999;
+  z-index: 9999;
 
   box-shadow:
     0 6px 18px rgba(37,99,235,0.35);
@@ -118,8 +124,15 @@ body,
 /* MOBILE */
 @media (max-width: 900px) {
 
+  html,
+  body,
+  #root {
+    overflow-y: auto;
+  }
+
   .app-container {
     flex-direction: column;
+    min-height: auto;
   }
 
   .viewer-section {
@@ -127,16 +140,26 @@ body,
     height: 100vh;
   }
 
-  /* HIDE QR ON MOBILE */
+  /* HIDE QR */
   .qr-section {
     display: none;
   }
 
+  /* FIXED BUTTON */
   .ar-button {
+    position: fixed;
+
     bottom: 20px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: auto;
+
+    padding: 14px 26px;
 
     font-size: 15px;
 
-    padding: 12px 24px;
+    z-index: 99999;
   }
 }
