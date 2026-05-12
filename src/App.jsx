@@ -73,44 +73,53 @@ function App() {
       {/* VIEWER */}
       <div className="viewer-section">
 
-        <model-viewer
-          src="/example.glb"
-          ios-src="/example.glb"
+       <model-viewer
+  src="/example.glb"
+  ios-src="/example.glb"
 
-          alt="3D Product"
+  alt="3D Product"
 
-          ar
-          ar-modes="scene-viewer quick-look webxr"
+  ar
+  ar-modes="scene-viewer quick-look webxr"
 
-          ar-placement="floor"
+  ar-placement="floor"
 
-          camera-controls
+  ar-scale="auto"
 
-          auto-rotate
-          auto-rotate-delay="0"
+  camera-controls
 
-          shadow-intensity="2"
-          shadow-softness="1"
+  auto-rotate
+  auto-rotate-delay="0"
 
-          exposure="1.3"
+  shadow-intensity="2"
+  shadow-softness="1"
 
-          environment-image="neutral"
+  exposure="1.2"
 
-          interaction-prompt="auto"
+  environment-image="neutral"
 
-          camera-orbit="0deg 75deg 105%"
+  interaction-prompt="auto"
 
-          className="model-viewer"
-        >
+  loading="eager"
 
-          <button
-            slot="ar-button"
-            className="ar-button"
-          >
-            View in Room
-          </button>
+  reveal="auto"
 
-        </model-viewer>
+  camera-orbit="0deg 75deg 105%"
+
+  min-camera-orbit="auto auto 50%"
+  max-camera-orbit="auto auto 200%"
+
+  field-of-view="30deg"
+
+  className="model-viewer"
+>
+  <button
+    slot="ar-button"
+    className="ar-button"
+  >
+    View in Room
+  </button>
+</model-viewer>
 
       </div>
 
