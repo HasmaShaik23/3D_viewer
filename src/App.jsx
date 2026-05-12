@@ -48,38 +48,48 @@
 // export default App;
 
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 import "./App.css";
 
 function App() {
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     import("@google/model-viewer");
+
+    const mobileCheck =
+      /Android|iPhone|iPad|iPod/i.test(
+        navigator.userAgent
+      );
+
+    setIsMobile(mobileCheck);
   }, []);
 
-  const deployedUrl = "https://3-d-viewer-phi.vercel.app/";
+  const deployedUrl =
+    "https://3-d-viewer-phi.vercel.app/";
 
   return (
     <div className="app-container">
 
-      {/* LEFT SIDE */}
+      {/* MODEL VIEWER */}
       <div className="viewer-section">
 
         <model-viewer
           src="/example.glb"
           alt="3D Product"
 
-          /* AR SETTINGS */
+          /* AR */
           ar
           ar-modes="scene-viewer webxr quick-look"
           ar-scale="auto"
           ar-placement="floor"
 
-          /* CAMERA */
+          /* CONTROLS */
           camera-controls
           touch-action="pan-y"
 
-          /* ROTATION */
+          /* AUTO ROTATE */
           auto-rotate
           auto-rotate-delay="0"
           rotation-per-second="20deg"
@@ -95,7 +105,7 @@ function App() {
           loading="eager"
           reveal="auto"
 
-          /* CAMERA POSITION */
+          /* CAMERA */
           camera-orbit="0deg 75deg 105%"
           min-camera-orbit="auto auto 50%"
           max-camera-orbit="auto auto 200%"
@@ -105,8 +115,11 @@ function App() {
           className="model-viewer"
         >
 
-          {/* AR BUTTON */}
-          <button slot="ar-button" className="ar-button">
+          {/* MOBILE AR BUTTON */}
+          <button
+            slot="ar-button"
+            className="ar-button"
+          >
             View in Room
           </button>
 
@@ -114,27 +127,29 @@ function App() {
 
       </div>
 
-      {/* RIGHT SIDE */}
-      <div className="qr-section">
+      {/* DESKTOP QR ONLY */}
+      {!isMobile && (
+        <div className="qr-section">
 
-        <div className="qr-box">
+          <div className="qr-box">
 
-          <QRCodeCanvas
-            value={deployedUrl}
-            size={220}
-            bgColor="#ffffff"
-            fgColor="#000000"
-            level="H"
-            includeMargin={true}
-          />
+            <QRCodeCanvas
+              value={deployedUrl}
+              size={220}
+              bgColor="#ffffff"
+              fgColor="#000000"
+              level="H"
+              includeMargin={true}
+            />
 
-          <p className="qr-text">
-            Scan to View in AR
-          </p>
+            <p className="qr-text">
+              Scan to View in AR
+            </p>
+
+          </div>
 
         </div>
-
-      </div>
+      )}
 
     </div>
   );
