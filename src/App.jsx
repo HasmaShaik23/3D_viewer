@@ -75,34 +75,27 @@ function App() {
       {/* MODEL VIEWER */}
       <div className="viewer-section">
 
-    <model-viewer
+<model-viewer
   src="/example.glb"
+  ios-src="/example.glb"
+
   alt="3D Product"
 
   ar
-  ar-modes="scene-viewer webxr quick-look"
+  ar-modes="scene-viewer quick-look webxr"
 
   ar-placement="floor"
-  ar-scale="fixed"
-
-  scale="0.3 0.3 0.3"
 
   camera-controls
-  touch-action="pan-y"
 
   auto-rotate
-  auto-rotate-delay="0"
 
   shadow-intensity="2"
   shadow-softness="1"
 
-  exposure="1.4"
+  exposure="1.3"
 
   environment-image="neutral"
-
-  loading="eager"
-
-  camera-orbit="0deg 75deg 105%"
 
   interaction-prompt="auto"
 
