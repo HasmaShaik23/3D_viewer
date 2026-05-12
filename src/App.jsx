@@ -56,8 +56,6 @@ function App() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    import("@google/model-viewer");
-
     const mobileCheck =
       /Android|iPhone|iPad|iPod/i.test(
         navigator.userAgent
@@ -72,46 +70,51 @@ function App() {
   return (
     <div className="app-container">
 
-      {/* MODEL VIEWER */}
+      {/* VIEWER */}
       <div className="viewer-section">
 
-<model-viewer
-  src="/example.glb"
-  ios-src="/example.glb"
+        <model-viewer
+          src="/example.glb"
+          ios-src="/example.glb"
 
-  alt="3D Product"
+          alt="3D Product"
 
-  ar
-  ar-modes="scene-viewer quick-look webxr"
+          ar
+          ar-modes="scene-viewer quick-look webxr"
 
-  ar-placement="floor"
+          ar-placement="floor"
 
-  camera-controls
+          camera-controls
 
-  auto-rotate
+          auto-rotate
+          auto-rotate-delay="0"
 
-  shadow-intensity="2"
-  shadow-softness="1"
+          shadow-intensity="2"
+          shadow-softness="1"
 
-  exposure="1.3"
+          exposure="1.3"
 
-  environment-image="neutral"
+          environment-image="neutral"
 
-  interaction-prompt="auto"
+          interaction-prompt="auto"
 
-  className="model-viewer"
->
-  <button
-    slot="ar-button"
-    className="ar-button"
-  >
-    View in Room
-  </button>
-</model-viewer>
+          camera-orbit="0deg 75deg 105%"
+
+          className="model-viewer"
+        >
+
+          <button
+            slot="ar-button"
+            className="ar-button"
+          >
+            View in Room
+          </button>
+
+        </model-viewer>
 
       </div>
 
-      {/* DESKTOP QR ONLY */}
+      {/* DESKTOP QR */}
       {!isMobile && (
         <div className="qr-section">
 
@@ -122,8 +125,6 @@ function App() {
               size={220}
               bgColor="#ffffff"
               fgColor="#000000"
-              level="H"
-              includeMargin={true}
             />
 
             <p className="qr-text">
