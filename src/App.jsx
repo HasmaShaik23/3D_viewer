@@ -72,8 +72,7 @@ function App() {
 
       {/* VIEWER */}
       <div className="viewer-section">
-
-       <model-viewer
+<model-viewer
   src="/example.glb"
   ios-src="/example.glb"
 
@@ -88,9 +87,6 @@ function App() {
 
   camera-controls
 
-  auto-rotate
-  auto-rotate-delay="0"
-
   shadow-intensity="2"
   shadow-softness="1"
 
@@ -102,7 +98,7 @@ function App() {
 
   loading="eager"
 
-  reveal="auto"
+  reveal="interaction"
 
   camera-orbit="0deg 75deg 105%"
 
