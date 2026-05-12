@@ -70,71 +70,90 @@ function App() {
   return (
     <div className="app-container">
 
-      {/* VIEWER */}
+      {/* MODEL AREA */}
       <div className="viewer-section">
-<model-viewer
-  src="/example.glb"
-  ios-src="/example.glb"
 
-  alt="3D Product"
+        <model-viewer
+          src="/example.glb"
+          ios-src="/example.glb"
 
-  ar
-  ar-modes="scene-viewer quick-look webxr"
+          alt="3D Product"
 
-  ar-placement="floor"
+          ar
+          ar-modes="scene-viewer quick-look webxr"
 
-  ar-scale="auto"
+          ar-placement="floor"
 
-  camera-controls
+          camera-controls
 
-  shadow-intensity="2"
-  shadow-softness="1"
+          auto-rotate
+          auto-rotate-delay="0"
 
-  exposure="1.2"
+          shadow-intensity="2"
+          shadow-softness="1"
 
-  environment-image="neutral"
+          exposure="1.2"
 
-  interaction-prompt="auto"
+          environment-image="neutral"
 
-  loading="eager"
+          interaction-prompt="auto"
 
-  reveal="interaction"
+          loading="eager"
 
-  camera-orbit="0deg 75deg 105%"
+          reveal="auto"
 
-  min-camera-orbit="auto auto 50%"
-  max-camera-orbit="auto auto 200%"
+          camera-orbit="0deg 75deg 2.5m"
 
-  field-of-view="30deg"
+          min-camera-orbit="auto auto 1m"
+          max-camera-orbit="auto auto 5m"
 
-  className="model-viewer"
->
-  <button
-    slot="ar-button"
-    className="ar-button"
-  >
-    View in Room
-  </button>
-</model-viewer>
+          field-of-view="30deg"
+
+          className="model-viewer"
+        >
+
+          <button
+            slot="ar-button"
+            className="ar-button"
+          >
+            View in Room
+          </button>
+
+        </model-viewer>
 
       </div>
 
-      {/* DESKTOP QR */}
+      {/* QR SECTION */}
       {!isMobile && (
         <div className="qr-section">
 
           <div className="qr-box">
 
-            <QRCodeCanvas
-              value={deployedUrl}
-              size={220}
-              bgColor="#ffffff"
-              fgColor="#000000"
-            />
+            <h2 className="qr-title">
+              View in AR
+            </h2>
+
+            <div className="qr-wrapper">
+<QRCodeCanvas
+  value={deployedUrl}
+  size={140}
+  bgColor="#ffffff"
+  fgColor="#000000"
+/>
+
+            </div>
 
             <p className="qr-text">
-              Scan to View in AR
+              Scan with your phone
             </p>
+
+            <p className="qr-subtext">
+              to view this model in AR
+            </p>
+
+            <div className="device-text">
+              📱 Works on iOS & Android
+            </div>
 
           </div>
 
