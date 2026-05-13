@@ -32,7 +32,7 @@ function App() {
       {/* CENTER MODEL */}
       <div className="viewer-section">
 
-        <model-viewer
+      <model-viewer
   ref={viewerRef}
 
   src="/example.glb"
@@ -45,21 +45,18 @@ function App() {
 
   ar-placement="floor"
 
-  ar-scale="auto"
+  ar-scale="fixed"
 
   camera-controls
-
-  disable-pan
-  disable-tap
 
   shadow-intensity="2"
   shadow-softness="1"
 
-  exposure="1.1"
+  exposure="1"
 
   environment-image="neutral"
 
-  interaction-prompt="auto"
+  interaction-prompt="none"
 
   loading="eager"
 
@@ -68,6 +65,11 @@ function App() {
   touch-action="pan-y"
 
   field-of-view="30deg"
+
+  min-camera-orbit="auto auto 100%"
+  max-camera-orbit="auto auto 100%"
+
+  interpolation-decay="200"
 
   className="model-viewer"
 >
