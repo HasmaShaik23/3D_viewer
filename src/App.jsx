@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 import "@google/model-viewer";
 import "./App.css";
@@ -7,6 +7,8 @@ function App() {
 
   const [isMobile, setIsMobile] =
     useState(false);
+
+  const viewerRef = useRef(null);
 
   useEffect(() => {
 
@@ -22,13 +24,34 @@ function App() {
   const deployedUrl =
     "https://3-d-viewer-phi.vercel.app/";
 
+  /* OPEN AR */
+  const openAR = async () => {
+
+    if (viewerRef.current) {
+
+      try {
+
+        await viewerRef.current.activateAR();
+
+      } catch (err) {
+
+        console.log(err);
+
+      }
+    }
+  };
+
   return (
+
     <div className="app-container">
 
-      {/* VIEWER */}
+      {/* MODEL VIEWER */}
       <div className="viewer-section">
 
         <model-viewer
+
+          ref={viewerRef}
+
           src="/example.glb"
           ios-src="/example.glb"
 
@@ -66,22 +89,35 @@ function App() {
 
           interpolation-decay="200"
 
+          min-camera-orbit="
+            auto auto 100%
+          "
+
+          max-camera-orbit="
+            auto auto 100%
+          "
+
           className="model-viewer"
+
         >
-
-          {/* NATIVE AR BUTTON */}
-          {isMobile && (
-            <button
-              slot="ar-button"
-              className="mobile-ar-button"
-            >
-              View in Room
-            </button>
-          )}
-
         </model-viewer>
 
       </div>
+
+      {/* MOBILE BUTTON */}
+      {isMobile && (
+
+        <div className="mobile-button-wrapper">
+
+          <button
+            className="mobile-ar-button"
+            onClick={openAR}
+          >
+            View in Room
+          </button>
+
+        </div>
+      )}
 
       {/* DESKTOP QR */}
       {!isMobile && (
