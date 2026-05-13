@@ -4,32 +4,36 @@
   box-sizing: border-box;
 }
 
+/* ROOT */
 html,
 body,
 #root {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
+
+  overflow-x: hidden;
+  overflow-y: auto;
 
   font-family: Arial, sans-serif;
 
   background: #f4f4f4;
+
+  -webkit-overflow-scrolling: touch;
 }
 
 /* MAIN */
 .app-container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   background: #f4f4f4;
-
-  position: relative;
 }
-/* LEFT SIDE */
+
+/* VIEWER SECTION */
 .viewer-section {
   flex: 1;
 
@@ -42,39 +46,37 @@ body,
   position: relative;
 }
 
-/* MODEL */
+/* DESKTOP MODEL */
 .model-viewer {
-  width: 85%;
-  height: 90vh;
+  width: 100%;
+  height: 100vh;
+
+  display: block;
 
   background: transparent;
 }
 
-/* RIGHT SIDE */
+/* QR SECTION */
 .qr-section {
-  width: 300px;
-  height: 100vh;
+  width: 280px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  position: absolute;
-
-  right: 30px;
-  top: 0;
+  padding: 20px;
 }
 
-/* QR CARD */
+/* QR BOX */
 .qr-box {
-  width: 260px;
-  height: 430px;
+  width: 230px;
+  height: 360px;
 
   background: white;
 
-  border-radius: 20px;
+  border-radius: 18px;
 
-  padding: 22px;
+  padding: 20px;
 
   display: flex;
   flex-direction: column;
@@ -87,14 +89,14 @@ body,
     0 10px 30px rgba(0,0,0,0.08);
 }
 
-/* TITLE */
+/* QR TITLE */
 .qr-title {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
 
   color: #111827;
 
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 /* QR */
@@ -108,9 +110,9 @@ body,
 
 /* TEXT */
 .qr-text {
-  margin-top: 18px;
+  margin-top: 16px;
 
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
 
   color: #374151;
@@ -119,56 +121,28 @@ body,
 }
 
 .qr-subtext {
-  margin-top: 8px;
+  margin-top: 6px;
 
-  font-size: 13px;
+  font-size: 12px;
 
   color: #6b7280;
 
   text-align: center;
 }
 
-/* DEVICE */
 .device-text {
-  margin-top: 14px;
+  margin-top: 12px;
 
-  font-size: 12px;
+  font-size: 11px;
 
   color: #9ca3af;
+
+  text-align: center;
 }
 
-/* AR BUTTON */
-.ar-button {
-  position: fixed;
-
-  bottom: 24px;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  background: linear-gradient(
-    135deg,
-    #2563eb,
-    #4f46e5
-  );
-
-  color: white;
-
-  border: none;
-
-  padding: 14px 28px;
-
-  border-radius: 999px;
-
-  font-size: 16px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  z-index: 9999;
-
-  box-shadow:
-    0 8px 20px rgba(37,99,235,0.35);
+/* MOBILE BUTTON WRAPPER */
+.mobile-button-wrapper {
+  display: none;
 }
 
 /* MOBILE */
@@ -177,21 +151,69 @@ body,
   html,
   body,
   #root {
-    overflow-y: auto;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    width: 100%;
+    min-height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    background: #f4f4f4;
   }
 
   .app-container {
-    display: block;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    overflow-y: auto;
+
+    padding-top: 0;
+    padding-bottom: 40px;
+
+    background: #f4f4f4;
   }
 
+  /* VIEWER */
   .viewer-section {
     width: 100%;
-    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    min-height: auto;
+
+    padding-top: 0;
+    padding-bottom: 0;
+
+    margin-top: -140px;
+    margin-bottom: -20px;
   }
 
+  /* MODEL */
   .model-viewer {
     width: 100%;
-    height: 100vh;
+    max-width: 100%;
+
+    height: 48vh;
+
+    display: block;
+
+    margin-top: -40px;
+    margin-bottom: 0;
+
+    background: transparent;
+
+    touch-action: pan-y !important;
   }
 
   /* HIDE QR */
@@ -199,11 +221,43 @@ body,
     display: none;
   }
 
-  .ar-button {
-    bottom: 20px;
+  /* BUTTON WRAPPER */
+  .mobile-button-wrapper {
+    display: flex;
 
-    font-size: 15px;
+    justify-content: center;
+    align-items: center;
 
-    padding: 14px 24px;
+    width: 100%;
+
+    margin-top: 0;
+    margin-bottom: 40px;
+  }
+
+  /* BUTTON */
+  .mobile-ar-button {
+    background: linear-gradient(
+      135deg,
+      #2563eb,
+      #4f46e5
+    );
+
+    color: white;
+
+    border: none;
+
+    padding: 16px 28px;
+
+    border-radius: 999px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    min-width: 190px;
+
+    box-shadow:
+      0 8px 20px rgba(37,99,235,0.35);
   }
 }

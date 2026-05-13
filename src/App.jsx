@@ -1,59 +1,12 @@
-// import { useEffect } from "react";
-
-// function App() {
-//   useEffect(() => {
-//     import("@google/model-viewer");
-//   }, []);
-
-//   return (
-//     <div style={{ width: "100%", height: "100vh" }}>
-//       <model-viewer
-//         src="/example.glb"
-//         alt="3D Model"
-//         ar
-//         ar-modes="webxr scene-viewer quick-look"
-//         camera-controls
-//         auto-rotate
-//         shadow-intensity="1"
-//         exposure="1"
-//         environment-image="neutral"
-//         style={{
-//           width: "100%",
-//           height: "100%",
-//           backgroundColor:"#ffffff",
-//         }}
-//       >
-//         <button
-//           slot="ar-button"
-//           style={{
-//             background: "#2563eb",
-//             color: "white",
-//             border: "none",
-//             padding: "12px 20px",
-//             borderRadius: "10px",
-//             position: "absolute",
-//             bottom: "20px",
-//             left: "50%",
-//             transform: "translateX(-50%)",
-//             cursor: "pointer",
-//           }}
-//         >
-//           View in AR
-//         </button>
-//       </model-viewer>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { QRCodeCanvas } from "qrcode.react";
+import "@google/model-viewer";
 import "./App.css";
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
+
+  const viewerRef = useRef(null);
 
   useEffect(() => {
     const mobileCheck =
@@ -67,13 +20,21 @@ function App() {
   const deployedUrl =
     "https://3-d-viewer-phi.vercel.app/";
 
+  const openAR = async () => {
+    if (viewerRef.current) {
+      await viewerRef.current.activateAR();
+    }
+  };
+
   return (
     <div className="app-container">
 
-      {/* MODEL AREA */}
+      {/* CENTER MODEL */}
       <div className="viewer-section">
 
         <model-viewer
+          ref={viewerRef}
+
           src="/example.glb"
           ios-src="/example.glb"
 
@@ -84,15 +45,14 @@ function App() {
 
           ar-placement="floor"
 
-          camera-controls
+          ar-scale="auto"
 
-          auto-rotate
-          auto-rotate-delay="0"
+          camera-controls
 
           shadow-intensity="2"
           shadow-softness="1"
 
-          exposure="1.2"
+          exposure="1.1"
 
           environment-image="neutral"
 
@@ -102,28 +62,36 @@ function App() {
 
           reveal="auto"
 
-          camera-orbit="0deg 75deg 2.5m"
+          auto-rotate
+          auto-rotate-delay="0"
 
-          min-camera-orbit="auto auto 1m"
-          max-camera-orbit="auto auto 5m"
+          touch-action="pan-y"
+
+          camera-orbit="0deg 75deg 2.5m"
 
           field-of-view="30deg"
 
           className="model-viewer"
         >
-
-          <button
-            slot="ar-button"
-            className="ar-button"
-          >
-            View in Room
-          </button>
-
         </model-viewer>
 
       </div>
 
-      {/* QR SECTION */}
+      {/* MOBILE BUTTON */}
+      {isMobile && (
+        <div className="mobile-button-wrapper">
+
+          <button
+            className="mobile-ar-button"
+            onClick={openAR}
+          >
+            View in Room
+          </button>
+
+        </div>
+      )}
+
+      {/* DESKTOP QR */}
       {!isMobile && (
         <div className="qr-section">
 
@@ -134,12 +102,13 @@ function App() {
             </h2>
 
             <div className="qr-wrapper">
-<QRCodeCanvas
-  value={deployedUrl}
-  size={140}
-  bgColor="#ffffff"
-  fgColor="#000000"
-/>
+
+              <QRCodeCanvas
+                value={deployedUrl}
+                size={140}
+                bgColor="#ffffff"
+                fgColor="#000000"
+              />
 
             </div>
 
