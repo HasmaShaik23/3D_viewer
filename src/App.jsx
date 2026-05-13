@@ -1,98 +1,91 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 import "@google/model-viewer";
 import "./App.css";
 
 function App() {
-  const [isMobile, setIsMobile] = useState(false);
 
-  const viewerRef = useRef(null);
+  const [isMobile, setIsMobile] =
+    useState(false);
 
   useEffect(() => {
+
     const mobileCheck =
       /Android|iPhone|iPad|iPod/i.test(
         navigator.userAgent
       );
 
     setIsMobile(mobileCheck);
+
   }, []);
 
   const deployedUrl =
     "https://3-d-viewer-phi.vercel.app/";
 
-  const openAR = async () => {
-    if (viewerRef.current) {
-      await viewerRef.current.activateAR();
-    }
-  };
-
   return (
     <div className="app-container">
 
-      {/* CENTER MODEL */}
+      {/* VIEWER */}
       <div className="viewer-section">
 
-      <model-viewer
-  ref={viewerRef}
+        <model-viewer
+          src="/example.glb"
+          ios-src="/example.glb"
 
-  src="/example.glb"
-  ios-src="/example.glb"
+          alt="3D Product"
 
-  alt="3D Product"
+          ar
+          ar-modes="
+            scene-viewer
+            quick-look
+            webxr
+          "
 
-  ar
-  ar-modes="scene-viewer quick-look webxr"
+          ar-placement="floor"
 
-  ar-placement="floor"
+          ar-scale="fixed"
 
-  ar-scale="fixed"
+          camera-controls
 
-  camera-controls
+          shadow-intensity="2"
+          shadow-softness="1"
 
-  shadow-intensity="2"
-  shadow-softness="1"
+          exposure="1"
 
-  exposure="1"
+          environment-image="neutral"
 
-  environment-image="neutral"
+          interaction-prompt="none"
 
-  interaction-prompt="none"
+          loading="eager"
 
-  loading="eager"
+          reveal="auto"
 
-  reveal="auto"
+          touch-action="pan-y"
 
-  touch-action="pan-y"
+          field-of-view="30deg"
 
-  field-of-view="30deg"
+          interpolation-decay="200"
 
-  min-camera-orbit="auto auto 100%"
-  max-camera-orbit="auto auto 100%"
+          className="model-viewer"
+        >
 
-  interpolation-decay="200"
+          {/* NATIVE AR BUTTON */}
+          {isMobile && (
+            <button
+              slot="ar-button"
+              className="mobile-ar-button"
+            >
+              View in Room
+            </button>
+          )}
 
-  className="model-viewer"
->
-</model-viewer>
+        </model-viewer>
 
       </div>
 
-      {/* MOBILE BUTTON */}
-      {isMobile && (
-        <div className="mobile-button-wrapper">
-
-          <button
-            className="mobile-ar-button"
-            onClick={openAR}
-          >
-            View in Room
-          </button>
-
-        </div>
-      )}
-
       {/* DESKTOP QR */}
       {!isMobile && (
+
         <div className="qr-section">
 
           <div className="qr-box">
