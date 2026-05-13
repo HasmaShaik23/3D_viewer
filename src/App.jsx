@@ -33,47 +33,45 @@ function App() {
       <div className="viewer-section">
 
         <model-viewer
-          ref={viewerRef}
+  ref={viewerRef}
 
-          src="/example.glb"
-          ios-src="/example.glb"
+  src="/example.glb"
+  ios-src="/example.glb"
 
-          alt="3D Product"
+  alt="3D Product"
 
-          ar
-          ar-modes="scene-viewer quick-look webxr"
+  ar
+  ar-modes="scene-viewer quick-look webxr"
 
-          ar-placement="floor"
+  ar-placement="floor"
 
-          ar-scale="auto"
+  ar-scale="auto"
 
-          camera-controls
+  camera-controls
 
-          shadow-intensity="2"
-          shadow-softness="1"
+  disable-pan
+  disable-tap
 
-          exposure="1.1"
+  shadow-intensity="2"
+  shadow-softness="1"
 
-          environment-image="neutral"
+  exposure="1.1"
 
-          interaction-prompt="auto"
+  environment-image="neutral"
 
-          loading="eager"
+  interaction-prompt="auto"
 
-          reveal="auto"
+  loading="eager"
 
-          auto-rotate
-          auto-rotate-delay="0"
+  reveal="auto"
 
-          touch-action="pan-y"
+  touch-action="pan-y"
 
-          camera-orbit="0deg 75deg 2.5m"
+  field-of-view="30deg"
 
-          field-of-view="30deg"
-
-          className="model-viewer"
-        >
-        </model-viewer>
+  className="model-viewer"
+>
+</model-viewer>
 
       </div>
 
